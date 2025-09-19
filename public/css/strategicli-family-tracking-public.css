@@ -1,0 +1,104 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+
+.sftr-tracker-wrapper {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    max-width: 400px;
+}
+
+.sftr-tracker-title {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.sftr-tracker-content p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.sftr-current-turn-label {
+    font-size: 0.9em;
+    color: #777;
+}
+
+.sftr-current-turn-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-top: 5px !important;
+    margin-bottom: 20px !important;
+}
+
+.sftr-random-result {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 20px !important;
+    min-height: 24px;
+}
+
+.sftr-action-button {
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sftr-action-button:hover {
+    background-color: #2980b9;
+}
+
+.sftr-action-button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+/* Points View Specific Styles */
+.sftr-participants-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sftr-participants-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.sftr-participants-list li:last-child {
+    border-bottom: none;
+}
+
+.sftr-participant-name {
+    font-weight: 500;
+}
+
+.sftr-participant-score {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #3498db;
+    min-width: 20px;
+    text-align: center;
+}
+
+.sftr-points-controls button {
+    padding: 5px 10px;
+    margin-left: 5px;
+}
