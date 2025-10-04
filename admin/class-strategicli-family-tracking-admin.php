@@ -141,6 +141,14 @@ class Strategicli_Family_Tracking_Admin {
 			</select>
 			<p class="description">How often the turn should automatically rotate to the next participant.</p>
 		</div>
+
+		<div class="sftr-meta-box-field">
+			<label>Shortcodes</label>
+			<input type="text" readonly value="[sftr_tracker id=&quot;<?php echo $post->ID; ?>&quot;]" style="width: 100%; max-width: 500px; margin-bottom: 10px;">
+			<p class="description">Use this shortcode to display this specific tracker on a page.</p>
+			<input type="text" readonly value="[sftr_dashboard]" style="width: 100%; max-width: 500px;">
+			<p class="description">Use this shortcode to display all trackers on a single page.</p>
+		</div>
 		<?php
 	}
 

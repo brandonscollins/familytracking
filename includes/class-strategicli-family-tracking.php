@@ -160,14 +160,24 @@ class Strategicli_Family_Tracking {
 		$this->loader->add_action( 'init', $plugin_public, 'register_shortcode' );
 
 		// Register AJAX action hooks
-		$this->loader->add_action( 'wp_ajax_sftr_advance_turn', $plugin_ajax, 'advance_turn' );
-		$this->loader->add_action( 'wp_ajax_nopriv_sftr_advance_turn', $plugin_ajax, 'advance_turn' );
+	$this->loader->add_action( 'wp_ajax_sftr_advance_turn', $plugin_ajax, 'advance_turn' );
+	$this->loader->add_action( 'wp_ajax_nopriv_sftr_advance_turn', $plugin_ajax, 'advance_turn' );
 
-		$this->loader->add_action( 'wp_ajax_sftr_update_points', $plugin_ajax, 'update_points' );
-		$this->loader->add_action( 'wp_ajax_nopriv_sftr_update_points', $plugin_ajax, 'update_points' );
+	$this->loader->add_action( 'wp_ajax_sftr_update_points', $plugin_ajax, 'update_points' );
+	$this->loader->add_action( 'wp_ajax_nopriv_sftr_update_points', $plugin_ajax, 'update_points' );
 
-		$this->loader->add_action( 'wp_ajax_sftr_random_pick', $plugin_ajax, 'random_pick' );
-		$this->loader->add_action( 'wp_ajax_nopriv_sftr_random_pick', $plugin_ajax, 'random_pick' );
+	$this->loader->add_action( 'wp_ajax_sftr_random_pick', $plugin_ajax, 'random_pick' );
+	$this->loader->add_action( 'wp_ajax_nopriv_sftr_random_pick', $plugin_ajax, 'random_pick' );
+
+	// Register AJAX actions for manual overrides
+	$this->loader->add_action( 'wp_ajax_sftr_override_turn', $plugin_ajax, 'override_turn' );
+	$this->loader->add_action( 'wp_ajax_nopriv_sftr_override_turn', $plugin_ajax, 'override_turn' );
+
+	$this->loader->add_action( 'wp_ajax_sftr_override_points', $plugin_ajax, 'override_points' );
+	$this->loader->add_action( 'wp_ajax_nopriv_sftr_override_points', $plugin_ajax, 'override_points' );
+
+	$this->loader->add_action( 'wp_ajax_sftr_override_random', $plugin_ajax, 'override_random' );
+	$this->loader->add_action( 'wp_ajax_nopriv_sftr_override_random', $plugin_ajax, 'override_random' );
 
 	}
 

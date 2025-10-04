@@ -50,6 +50,118 @@
 		});
 
 		/**
+		 * Handle "Manual Override" for turn advancement.
+		 */
+		$(document).on('click', '.sftr-override-turn-button', function(e) {
+			e.preventDefault();
+			const button = $(this);
+			const wrapper = button.closest('.sftr-tracker-wrapper');
+			const postId = wrapper.data('postid');
+			const participants = wrapper.find('.sftr-participant-name').map(function(){ return $(this).text(); }).get();
+			let participant = prompt('Enter the name of the participant to set as current turn:', participants[0] || '');
+			if (!participant) return;
+			let reason = prompt('Optional: Enter a reason for override (e.g., absent, swap, etc.):', '');
+			button.prop('disabled', true).text('Overriding...');
+			$.post(sftr_ajax_object.ajax_url, {
+				action: 'sftr_override_turn',
+				nonce: sftr_ajax_object.nonce,
+				post_id: postId,
+				participant: participant,
+				reason: reason
+			})
+			.done(function(response) {
+				if (response.success) {
+					wrapper.find('.sftr-current-turn-name').text(response.data.new_person_name + "'s turn.");
+				} else {
+					console.error('Error overriding turn:', response.data);
+					alert('An error occurred. Please try again.');
+				}
+			})
+			.fail(function() {
+				console.error('AJAX request failed.');
+				alert('A server error occurred. Please try again.');
+			})
+			.always(function() {
+				button.prop('disabled', false).text('Manual Override');
+			});
+		});
+
+		/**
+		 * Handle "Manual Override" for points.
+		 */
+		$(document).on('click', '.sftr-override-points-button', function(e) {
+			e.preventDefault();
+			const button = $(this);
+			const wrapper = button.closest('.sftr-tracker-wrapper');
+			const listItem = button.closest('li');
+			const postId = wrapper.data('postid');
+			const participant = button.data('participant');
+			let newScore = prompt('Enter the new score for ' + participant + ':', listItem.find('.sftr-participant-score').text());
+			if (newScore === null) return;
+			let reason = prompt('Optional: Enter a reason for override:', '');
+			button.prop('disabled', true).text('Overriding...');
+			$.post(sftr_ajax_object.ajax_url, {
+				action: 'sftr_override_points',
+				nonce: sftr_ajax_object.nonce,
+				post_id: postId,
+				participant: participant,
+				new_score: newScore,
+				reason: reason
+			})
+			.done(function(response) {
+				if (response.success) {
+					listItem.find('.sftr-participant-score').text(response.data.new_score);
+				} else {
+					console.error('Error overriding points:', response.data);
+					alert('An error occurred. Please try again.');
+				}
+			})
+			.fail(function() {
+				console.error('AJAX request failed.');
+				alert('A server error occurred. Please try again.');
+			})
+			.always(function() {
+				button.prop('disabled', false).text('Manual Override');
+			});
+		});
+
+		/**
+		 * Handle "Manual Override" for random picker.
+		 */
+		$(document).on('click', '.sftr-override-random-button', function(e) {
+			e.preventDefault();
+			const button = $(this);
+			const wrapper = button.closest('.sftr-tracker-wrapper');
+			const postId = wrapper.data('postid');
+			let winner = prompt('Enter the name of the participant to set as winner:', '');
+			if (!winner) return;
+			let reason = prompt('Optional: Enter a reason for override:', '');
+			button.prop('disabled', true).text('Overriding...');
+			$.post(sftr_ajax_object.ajax_url, {
+				action: 'sftr_override_random',
+				nonce: sftr_ajax_object.nonce,
+				post_id: postId,
+				winner: winner,
+				reason: reason
+			})
+			.done(function(response) {
+				if (response.success) {
+					wrapper.find('.sftr-random-result').html('The winner is... <strong>' + response.data.winner_name + '!</strong>');
+				} else {
+					console.error('Error overriding random pick:', response.data);
+					alert('An error occurred. Please try again.');
+				}
+			})
+			.fail(function() {
+				console.error('AJAX request failed.');
+				alert('A server error occurred. Please try again.');
+			})
+			.always(function() {
+				button.prop('disabled', false).text('Manual Override');
+			});
+		});
+
+		/**
 		 * Handle "+/-" buttons for points.
 		 */
 		$(document).on('click', '.sftr-update-points-button', function(e) {
@@ -121,6 +233,24 @@
 			})
 			.always(function() {
 				button.prop('disabled', false).text('Choose for Me');
+			});
+		});
+
+		/**
+		 * Handle "View History" button click.
+		 */
+		$(document).on('click', '.sftr-toggle-history-button', function(e) {
+			e.preventDefault();
+			const button = $(this);
+			const historyLog = button.siblings('.sftr-history-log');
+
+			// Toggle visibility and update button text
+			historyLog.slideToggle(200, function() {
+				if (historyLog.is(':visible')) {
+					button.text('Hide History');
+				} else {
+					button.text('View History');
+				}
 			});
 		});
 	});
